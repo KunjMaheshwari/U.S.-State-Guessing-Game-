@@ -17,6 +17,11 @@ should_continue = True
 while should_continue:
     ask_user = screen.textinput(title=f"{len(guessed_state)}/50",
                                 prompt="What's another state's name?")
+    if ask_user == "Exit":
+        missing_states = [states for states in Value_of_state if state not in guessed_state]       # List Comprehension Concept
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn.csv")
+        break
 
     if ask_user in Value_of_state:
         guessed_state.append(ask_user)
